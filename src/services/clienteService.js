@@ -1,7 +1,7 @@
 import db from '../db/db.js';
 import bcrypt from 'bcrypt';
 
-export const findAll = async (minValor, maxValor, nome, idProduto) => {
+export const findAll = async (nome, email, cpf) => {
   // 1. Define a consulta SQL base
   let sql = 'SELECT * FROM usuario';
   // 2. Cria um array para as condições WHERE

@@ -1,4 +1,3 @@
-//src/routes/clienteRoutes.js
 import express from 'express';
 import * as clienteController from '../controllers/clienteController.js';
 import validate from '../middlewares/validate.js';
