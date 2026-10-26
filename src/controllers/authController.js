@@ -13,7 +13,7 @@ try {
     }
     //2. Comparar a senha enviada com o hash salvo no banco
     const senhaValida = await bcrypt.compare(senha , cliente.senha);
-    if(!senha) {
+    if(!senhaValida) {
         return res.status(401).json({message: "Credenciais inválidas"});
     }    
     // 3. Gerar o Token JWT 

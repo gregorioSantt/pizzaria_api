@@ -19,7 +19,7 @@ router.use(authMiddleware);
 // Agora definimos apenas as partes relativas: '/', etc.
 router.get('/', clienteController.listarClientes); // Rota final: GET /api/clientes
 
-router.put('/:cpf', validate (clienteUpdateSchema) , clienteController.atualizarCliente); // Rota final: PUT /api/clientes/:cpf
+router.put('/:cpf', validate (clienteUpdateSchema), clienteController.atualizarCliente); // Rota final: PUT /api/clientes/:cpf
 
 router.delete('/:cpf', clienteController.deletarCliente); // Rota final: DELETE /api/clientes/:cpf
 export default router;
