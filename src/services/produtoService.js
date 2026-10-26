@@ -27,14 +27,7 @@ export const findAll = async (minValor, maxValor, nomeProduto, tipo, idProduto) 
 
 };
 
-export const update = async (minValor, maxValor, nomeProduto, tipo, idProduto) => {
-  if (produtoData.senha) {
-    const saltRounds = 10;
-    produtoData.senha = await bcrypt.hash(produtoData.senha, saltRounds);
-  }
-  const [result] = await db.query('UPDATE produto SET ? WHERE id = ?', [produtoData, idProduto]);
-  return result.affectedRows > 0;
-};
+
 
 export const remove = async (idProduto) => {
   const [result] = await db.query('DELETE FROM produto WHERE id = ?', [idProduto]);

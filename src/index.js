@@ -49,7 +49,7 @@ const apiPrefix = '/api';
 // Rotas gerais da API (ex: /api/sandro)
 app.use(`${apiPrefix}/clientes`, clienteRoutes); // ex: /api/clientes/
 app.use(`${apiPrefix}/login`, authRoutes); //Rota de login ex:/api/login
-// app.use(`${apiPrefix}/produtos`, produtoRoutes); // ex: /api/produtos/
+app.use(`${apiPrefix}/produtos`, produtoRoutes); // ex: /api/produtos/
 // app.use(`${apiPrefix}/pedidos`, pedidoRoutes);   // ex: /api/pedidos/ (exige token)
 
 // --- TRATAMENTO DE ERROS ---
