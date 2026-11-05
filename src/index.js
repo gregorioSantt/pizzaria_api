@@ -14,7 +14,8 @@ import { fileURLToPath } from 'url';
 import authRoutes from './routes/authRoutes.js'; // //descomentar para habilitar
 import clienteRoutes from '../src/routes/clienteRoutes.js';
 import produtoRoutes from './routes/produtoRoutes.js';
-// import pedidoRoutes from './routes/pedidoRoutes.js';
+import pedidoRoutes from './routes/pedidoRoutes.js';
+
 
 
 // --- CONFIGURAÇÕES ---
@@ -49,7 +50,7 @@ const apiPrefix = '/api';
 app.use(`${apiPrefix}/clientes`, clienteRoutes); // ex: /api/clientes/
 app.use(`${apiPrefix}/login`, authRoutes); //Rota de login ex:/api/login
 app.use(`${apiPrefix}/produtos`, produtoRoutes); // ex: /api/produtos/
-//app.use(`${apiPrefix}/pedidos`, pedidoRoutes);   // ex: /api/pedidos/ (exige token)
+app.use(`${apiPrefix}/pedidos`, pedidoRoutes);   // ex: /api/pedidos/ (exige token)
 
 // --- TRATAMENTO DE ERROS ---
 // Um middleware de erro centralizado.
