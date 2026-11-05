@@ -26,9 +26,15 @@ export const listarProdutos = async (req, res) => {
     try {
       // Capturamos os parâmetros de consulta da URL
       // ex: ?idProduto=12345678901 / ?nomeProduto=pizza / ?valor=29.90
-      const { idProduto, nomeProduto, valor } = req.query;
+      const { idProduto, nomeProduto, valor, tipo, maxValor, minValor } = req.query;
       // Passamos todos os filtros para o serviço
-      const produtos = await produtoService.findAll(idProduto, nomeProduto, valor);
+    console.log('Nome recebido:', nomeProduto);
+      const produtos = await produtoService.findAll(
+    minValor,
+    maxValor,
+    tipo,
+    nomeProduto,
+    idProduto);
     // Lista vazia é uma resposta válida: 200 com []
       res.json(produtos);
     } catch (err) {
