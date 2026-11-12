@@ -5,7 +5,6 @@ import Joi from 'joi';
 //Usando 'export const' para criar e exportar a função
 //Criação dos Schemas que o validate irá usar para validar dados do usuário
 export const produtoCreateSchema = Joi.object({
-  idProduto: Joi.string().length(11).required(),
   nomeProduto: Joi.string().required().max(100),
   valor: Joi.number().required(),
   descricao: Joi.string().max(100).allow(),

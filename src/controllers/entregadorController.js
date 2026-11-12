@@ -5,16 +5,17 @@ import Joi from 'joi';
 
 //Usando 'export const' para criar e exportar a função
 //Criação dos Schemas que o validate irá usar para validar dados do usuário
-export const entregadorCreateSchema = Joi.object({
-  idEntregador: Joi.string().length(11).required(),
-  nomeEntregador: Joi.string().required().max(50),
-  telefone: Joi.string().max(11).allow(''),
+export const entregadoresCreateSchema = Joi.object({
+    nomeEntregador: Joi.string().required().max(50),
+    telefone: Joi.number().integer().required(),
+    
 });
+console.log(entregadoresCreateSchema.describe());
 
-export const entregadorUpdateSchema = Joi.object({
-  nomeEntregador: Joi.string().max(50),
-  telefone: Joi.string().max(11).allow(''),
-  idEntregador: Joi.string().max(30).allow(''),
+export const entregadoresUpdateSchema = Joi.object({
+    nomeEntregador: Joi.string().max(50),
+    telefone: Joi.number().integer(),
+   
 }).min(1);
 
 export const listarEntregadores = async (req, res) => {
@@ -25,11 +26,13 @@ export const listarEntregadores = async (req, res) => {
       // Passamos todos os filtros para o serviço
       const entregadores = await entregadorService.findAll(idEntregador, nomeEntregador, telefone);
     // Lista vazia é uma resposta válida: 200 com []
-      res.json(entregador);
+      res.json(entregadores);
     } catch (err) {
       console.error('Erro ao buscar entregador:', err);
       res.status(500).json({ error: 'Erro interno do servidor' });
     }
+
+    
 };
 
 

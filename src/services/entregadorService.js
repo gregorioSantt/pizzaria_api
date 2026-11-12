@@ -1,46 +1,52 @@
 import db from '../db/db.js';
 import bcrypt from 'bcrypt';
 
-export const findAll = async (nomeEntregador, telefone, idEntregador) => {
-  // 1. Define a consulta SQL base
+export const findAll = async (idEntregador, nomeEntregador, telefone) => {
   let sql = 'SELECT * FROM entregador';
-  // 2. Cria um array para as condições WHERE
+
   const conditions = [];
-  // 3. Cria um array para os valores (para prevenir SQL Injection)
   const values = [];
-  // 4. Adiciona as condições dinamicamente
-  // Adicionamos o filtro de ID
+
   if (idEntregador) {
     conditions.push('idEntregador = ?');
     values.push(idEntregador);
   }
-  // Adicionamos o filtro de nome
+
   if (nomeEntregador) {
     conditions.push('LOWER(nomeEntregador) LIKE ?');
     values.push(`%${nomeEntregador.toLowerCase()}%`);
   }
-  // Adicionamos o filtro de telefone
+
   if (telefone) {
     conditions.push('telefone = ?');
     values.push(telefone);
-  };
-}
+  }
+
+  if (conditions.length > 0) {
+    sql += ' WHERE ' + conditions.join(' AND ');
+  }
+
+  const [rows] = await db.query(sql, values);
+
+  return rows;
+};
 
 
 export const create = async (newEntregadorData) => {
-  const saltRounds = 10;
-  const hashedPassword = await bcrypt.hash(newEntregadorData.senha, saltRounds);
 
-  const newEntregador = {
-    ...newEntregadorData,
-    senha: hashedPassword,
-    tipo: 'entregador',
-  };
+    const newEntregador = {
+        ...newEntregadorData
+    };
 
-  await db.query('INSERT INTO entregador SET ?', newEntregador);
+    const [result] = await db.query(
+        'INSERT INTO entregador SET ?',
+        newEntregador
+    );
 
-  delete newEntregador.senha;
-  return newEntregador;
+    return {
+        idEntregador: result.insertId,
+        ...newEntregador
+    };
 };
 
 export const update = async (idEntregador, entregadorData) => {
